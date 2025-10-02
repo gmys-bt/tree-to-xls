@@ -28,85 +28,35 @@ const tree = [
   },
 ];
 
-function flattenTree(nodes, level = 0, maxDepth = getMaxDepth(tree)) {
-  const result = [];
+const flatten = (treeStructure, level = 0) => {
+  const rows = [];
+  const headers = [];
 
-  for (const node of nodes) {
-    const row = {};
+  for (const node of treeStructure) {
+    const row = [];
+    const baseLevel = level > 0 ? level - 1 : level;
 
-    // columns (using array indices for column positions)
-    for (let i = 0; i <= maxDepth; i++) {
-      row[i] = i === level ? node.name : '';
-    }
+    const keys = Object.keys(node).filter((k) => k !== 'children');
 
-    row[maxDepth + 1] = node.address || '';
-    row[maxDepth + 2] = node.city || '';
+    headers[level] = keys;
 
-    // outline level for this row (this is crucial for expand / collapse)
-    row._outlineLevel = level;
+    keys.forEach((k, i) => {
+      row[baseLevel + i] = node[k];
+    });
 
-    result.push(row);
+    rows.push(row);
 
-    // add children (recursive)
-    if (node.children && node.children.length > 0) {
-      result.push(...flattenTree(node.children, level + 1, maxDepth));
-    }
-  }
-
-  return result;
-}
-
-function getMaxDepth(nodes, currentDepth = 0) {
-  let maxDepth = currentDepth;
-
-  for (const node of nodes) {
-    if (node.children && node.children.length > 0) {
-      const childDepth = getMaxDepth(node.children, currentDepth + 1);
-      maxDepth = Math.max(maxDepth, childDepth);
+    if (node.children) {
+      const parsedChildren = flatten(node.children, level + keys.length);
+      rows.push(...parsedChildren.rows);
+      headers.push(...parsedChildren.headers);
     }
   }
 
-  return maxDepth;
-}
-
-const treeToGroupedXLSX = (treeData) => {
-  const flatData = flattenTree(treeData);
-  const workbook = XLSX.utils.book_new();
-  const worksheet = XLSX.utils.json_to_sheet(flatData, { skipHeader: true });
-
-  // set row outline levels for grouping
-  if (!worksheet['!rows']) worksheet['!rows'] = [];
-
-  flatData.forEach((row, index) => {
-    if (!worksheet['!rows'][index]) worksheet['!rows'][index] = {};
-    worksheet['!rows'][index].level = row._outlineLevel;
-  });
-
-  // remove the outline level from the actual data before creating the sheet - so that it wont be rendered in the xlsx itself
-  const cleanData = flatData.map((row) => {
-    const { _outlineLevel, ...cleanRow } = row;
-    return cleanRow;
-  });
-
-  // recreate worksheet with clean data, without outline levels
-  const cleanWorksheet = XLSX.utils.json_to_sheet(cleanData, {
-    skipHeader: true,
-  });
-
-  // apply the row grouping to the clean worksheet
-  if (!cleanWorksheet['!rows']) cleanWorksheet['!rows'] = [];
-  flatData.forEach((row, index) => {
-    if (!cleanWorksheet['!rows'][index]) cleanWorksheet['!rows'][index] = {};
-    cleanWorksheet['!rows'][index].level = row._outlineLevel;
-  });
-
-  // Add the clean worksheet to workbook
-  XLSX.utils.book_append_sheet(workbook, cleanWorksheet, 'Tree Data');
-
-  // console.log('Data structure:');
-  // console.table(flatData);
-
-  return workbook;
+  return { rows, headers: headers.filter(Boolean).flat() };
 };
 
-XLSX.writeFile(treeToGroupedXLSX(tree), 'tree_output.xlsx');
+const result = flatten(tree);
+
+console.log(result.headers.slice(1, result.headers.length));
+console.log(result.rows);
