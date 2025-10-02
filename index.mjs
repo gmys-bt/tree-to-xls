@@ -73,7 +73,7 @@ const flatten = (treeStructure, level = 0) => {
     });
 
     // just two levels, 0 and 1 are necessary for outlines
-    rows.push({ row, level: level > 1 ? 1 : level });
+    rows.push({ row, level: level > 1 ? 2 : level });
 
     if (node.children) {
       const parsedChildren = flatten(node.children, level + keys.length);
@@ -87,9 +87,30 @@ const flatten = (treeStructure, level = 0) => {
 
 const result = flatten(tree);
 
-console.log(
-  [...new Set(result.headers.slice(1, result.headers.length))].map(
-    (h) => h.split('.')[1],
-  ),
-);
+const deduplicatedHeaders = [
+  ...new Set(result.headers.slice(1, result.headers.length)),
+].map((h) => h.split('.')[1]);
+
 console.log(result.rows);
+
+const dataToExport = [
+  deduplicatedHeaders,
+  ...result.rows.map((row) => row.row),
+];
+const ws = XLSX.utils.aoa_to_sheet(dataToExport);
+
+console.log(dataToExport);
+
+// Set outline levels (row-level, 0-based, skip header)
+result.rows.forEach((r, i) => {
+  // i+1 because worksheetData has header at 0
+  const rowNum = i + 1; // 1-based, +1 for header
+  if (!ws['!rows']) ws['!rows'] = [];
+  ws['!rows'][rowNum - 1] = ws['!rows'][rowNum - 1] || {};
+  ws['!rows'][rowNum - 1].level = r.level;
+});
+
+// Create workbook and write file
+const wb = XLSX.utils.book_new();
+XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+XLSX.writeFile(wb, 'tree-outline.xlsx');
