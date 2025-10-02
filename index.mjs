@@ -101,13 +101,16 @@ const ws = XLSX.utils.aoa_to_sheet(dataToExport);
 
 console.log(dataToExport);
 
+if (!ws['outline']) ws['!outline'] = {};
+ws['!outline'].above = true;
+
 // Set outline levels (row-level, 0-based, skip header)
 result.rows.forEach((r, i) => {
   // i+1 because worksheetData has header at 0
   const rowNum = i + 1; // 1-based, +1 for header
   if (!ws['!rows']) ws['!rows'] = [];
-  ws['!rows'][rowNum - 1] = ws['!rows'][rowNum - 1] || {};
-  ws['!rows'][rowNum - 1].level = r.level;
+  ws['!rows'][rowNum] = ws['!rows'][rowNum] || {};
+  ws['!rows'][rowNum].level = r.level;
 });
 
 // Create workbook and write file
