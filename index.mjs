@@ -2,52 +2,57 @@ import * as XLSX from 'xlsx';
 
 const tree = [
   {
-    groupName: 'group 1',
+    name: 'group 1',
     children: [
       {
-        'Task Name': 'nuggets',
-        address: 'some address',
-        city: 'chicago',
+        name: 'subgroup 1',
         children: [
           {
-            name: 'nested record',
+            name: 'fries',
+            address: 'some address',
+            city: 'new york',
+          },
+          {
+            name: 'ice cream',
+            address: 'some address',
+            city: 'boston',
           },
         ],
-      },
-      {
-        'Task Name': 'fries',
-        address: 'some address',
-        city: 'new york',
-      },
-      {
-        'Task Name': 'ice cream',
-        address: 'some address',
-        city: 'boston',
       },
     ],
   },
   {
-    groupName: 'group 2',
+    name: 'group 2',
     children: [
       {
-        'Task Name': 'nuggets',
-        address: 'some address',
-        city: 'chicago',
+        name: 'subgroup 1',
         children: [
           {
-            name: 'nested record',
+            name: 'fries',
+            address: 'some address',
+            city: 'new york',
+          },
+          {
+            name: 'ice cream',
+            address: 'some address',
+            city: 'boston',
           },
         ],
       },
       {
-        'Task Name': 'fries',
-        address: 'some address',
-        city: 'new york',
-      },
-      {
-        'Task Name': 'ice cream',
-        address: 'some address',
-        city: 'boston',
+        name: 'subgroup 2',
+        children: [
+          {
+            name: 'fries',
+            address: 'some address',
+            city: 'new york',
+          },
+          {
+            name: 'ice cream',
+            address: 'some address',
+            city: 'boston',
+          },
+        ],
       },
     ],
   },
@@ -69,7 +74,7 @@ const flatten = (treeStructure, level = 0) => {
     headers[level] = keys.map((k) => `${level - 1}.${k}`);
 
     keys.forEach((k, i) => {
-      row[baseLevel + i] = node[k];
+      row[i] = node[k];
     });
 
     // just two levels, 0 and 1 are necessary for outlines
@@ -87,9 +92,9 @@ const flatten = (treeStructure, level = 0) => {
 
 const result = flatten(tree);
 
-const deduplicatedHeaders = [
-  ...new Set(result.headers.slice(1, result.headers.length)),
-].map((h) => h.split('.')[1]);
+const deduplicatedHeaders = [...new Set(result.headers)]
+  .map((h) => h.split('.')[1])
+  .splice(-3);
 
 console.log(result.rows);
 
