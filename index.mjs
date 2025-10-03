@@ -1,81 +1,5 @@
 import * as XLSX from 'xlsx';
-
-const TASK_NAME = 'Task Name';
-const WBS_CODE_PPSA = 'WBS Code (PPSA)';
-const ROLE_NAME_PRICING_SHEET =
-  'Role Name (Pricing Sheet Original Reference - Do n';
-const ASSIGNED_TO = 'Assigned To';
-const BUDGETED_HOURS = 'Budgeted Hours';
-const EFFORT_HRS = 'Effort (hrs)';
-const WORKED_TASK_HOURS = 'Worked Task Hours';
-const REMAINING_TASK_HOURS = 'Remaining Task Hours';
-const DURATION = 'Duration';
-const START_DATE = 'Start Date';
-const END_DATE = 'End Date';
-const PREDECESSORS = 'Predecessors';
-const PERCENT_ALLOCATION = '% Allocation';
-const TASK_TYPE = 'Task Type';
-const COMMENTS = 'Comments';
-const OPEN_FOR_TIME = 'Open for Time';
-const WORKED_MINUTES_PPSA = 'Worked Minutes (PPSA)';
-const REMAINING_MINUTES_PPSA = 'Remaining Minutes (PPSA)';
-
-// An array, to guarantee order
-const columnMapping = [
-  TASK_NAME,
-  WBS_CODE_PPSA,
-  ROLE_NAME_PRICING_SHEET,
-  ASSIGNED_TO,
-  BUDGETED_HOURS,
-  EFFORT_HRS,
-  WORKED_TASK_HOURS,
-  REMAINING_TASK_HOURS,
-  DURATION,
-  START_DATE,
-  END_DATE,
-  PREDECESSORS,
-  PERCENT_ALLOCATION,
-  TASK_TYPE,
-  COMMENTS,
-  OPEN_FOR_TIME,
-  WORKED_MINUTES_PPSA,
-  REMAINING_MINUTES_PPSA,
-];
-
-const tree = [
-  {
-    [TASK_NAME]: 'P0 (Phase 0)',
-    [WBS_CODE_PPSA]: '1.1.1',
-    children: [
-      {
-        [TASK_NAME]: 'P0-Delivery / Project Management',
-        [WBS_CODE_PPSA]: '1.1.1',
-        children: [
-          {
-            [TASK_NAME]: 'Phase 0 Day Before',
-            [WBS_CODE_PPSA]: '1.1.1',
-            [ROLE_NAME_PRICING_SHEET]: '',
-            [ASSIGNED_TO]: '',
-            [BUDGETED_HOURS]: 618,
-            [EFFORT_HRS]: 618,
-            [WORKED_TASK_HOURS]: 0,
-            [REMAINING_TASK_HOURS]: 0,
-            [DURATION]: '68d',
-            [START_DATE]: '08/24/25',
-            [END_DATE]: '11/26/25',
-            [PREDECESSORS]: '',
-            [PERCENT_ALLOCATION]: '',
-            [TASK_TYPE]: '',
-            [COMMENTS]: '',
-            [OPEN_FOR_TIME]: 'True',
-            [WORKED_MINUTES_PPSA]: '',
-            [REMAINING_MINUTES_PPSA]: 37080,
-          },
-        ],
-      },
-    ],
-  },
-];
+import { tree, columnMapping } from './js_tree_with_constants.mjs';
 
 const flatten = (treeStructure, level = 0) => {
   const rows = [];
@@ -105,7 +29,7 @@ const result = flatten(tree);
 const dataToExport = [columnMapping, ...result.rows.map((row) => row.row)];
 const ws = XLSX.utils.aoa_to_sheet(dataToExport);
 
-console.log(result.rows);
+// console.log(result.rows);
 
 if (!ws['outline']) ws['!outline'] = {};
 ws['!outline'].above = true;
@@ -119,7 +43,11 @@ result.rows.forEach((r, i) => {
   ws['!rows'][rowNum].level = r.level;
 });
 
+const filePath = 'tree-outline.xlsx';
+
 // Create workbook and write file
 const wb = XLSX.utils.book_new();
 XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-XLSX.writeFile(wb, 'tree-outline.xlsx');
+XLSX.writeFile(wb, filePath);
+
+console.log('file written to:', filePath);
