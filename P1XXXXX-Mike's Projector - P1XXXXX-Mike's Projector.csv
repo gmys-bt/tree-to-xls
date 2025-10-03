@@ -1,0 +1,69 @@
+Task Name,WBS Code (PPSA),Role Name (Pricing Sheet Original Reference - Do n,Assigned To,Budgeted Hours from WBS,Effort (hrs),Worked Task Hours,Remaining Task Hours,Duration,Start Date,End Date,Predecessors,% Allocation,Task Type,Comments,Open for Time,Worked Minutes (PPSA),Remaining Minutes (PPSA)
+P0 (Phase 0),1,,,618,618,0,618,68d,08/24/25,11/26/25,,,,,TRUE,0,37080
+P0-Delivery / Project Management,1.1,,,118,118,0,118,68d,08/24/25,11/26/25,,,,,TRUE,0,7080
+Phase 0 Day Before,1.1.1,,,,,0,0,1d,08/24/25,08/24/25,,,P1-Employee Central,,,0,0
+PM-USA-P0-1,1.1.2,(US Project Manager-P0-1),(Project Manager - Lead 1),118,118,0,118,67d,08/25/25,11/26/25,3,22%,P0-PM Only,,TRUE,0,7080
+39 - Recruiting  / ONB - Advisory Services,1.1.3,,,,,0,0,19d,08/25/25,09/19/25,3,,P1-Employee Central,,TRUE,0,0
+40 - Core - Advisory Services,1.1.4,,,,,0,0,9d,08/25/25,09/05/25,3,,P1-Employee Central,,,0,0
+41 - Talent - Advisory Services,1.1.5,,,,,0,0,19d,08/25/25,09/19/25,3,,P1-Employee Central,,TRUE,0,0
+P0-39 - Recruiting  / ONB - Advisory Services,1.2,,,150,150,0,150,48d,09/22/25,11/26/25,5,,,39,,0,9000
+Phase 0 Advisory-Rec,1.2.1,(39-Rec/Onb Advisory-Phase 0 Advisory-Rec-Lead-USA-P0-1),(Recruiting / ONB - Advisory Services - Lead 1),150,150,0,150,48d,09/22/25,11/26/25,,39%,P0-Recruiting  / ONB - Advisory Services,,,0,9000
+P0-40 - Core - Advisory Services,1.3,,,200,200,0,200,40d,09/08/25,10/31/25,6,,,40,TRUE,0,12000
+Phase 0 Advisory -EC,1.3.1,(40-Core Advisory-Phase 0 Advisory -EC-Lead-USA-P0-1),(Core - Advisory Services - Lead 1),200,200,0,200,40d,09/08/25,10/31/25,,63%,P0-Core - Advisory Services,,TRUE,0,12000
+P0-41 - Talent - Advisory Services,1.4,,,150,150,0,150,48d,09/22/25,11/26/25,7,,,41,,0,9000
+Phase 0 Advisory-Talent,1.4.1,(31-Talent Advisory-Phase 0 Advisory-Talent-Lead-USA-P0-1),(Talent - Advisory Services - Lead 1),150,150,0,150,48d,09/22/25,11/26/25,,39%,P0-Talent - Advisory Services,,,0,9000
+P1 (Phase 1),2,,,5250,5250,0,5750,452d,12/07/25,09/20/27,,,,,,0,345000
+P1-Delivery / Project Management,2.1,,,1175,1175,0,1275,190d,12/07/25,09/04/26,,,,,,0,76500
+Phase 1 Day Before,2.1.1,,,,,0,0,1d,12/07/25,12/07/25,,,P1-Employee Central,,,0,0
+PM-USA-P1-1,2.1.2,(US Project Manager-P1-1),(Project Manager - Lead 11),450,550,0,550,189d,12/08/25,09/04/26,16,36%,P1-PM / DM / PC,,,0,33000
+DM-LATAM-P1-2,2.1.3,(LATAM Delivery Manager-P1-2),(LATAM - Delivery Manager - Lead 12),450,375,0,375,189d,12/08/25,09/04/26,16,25%,P1-PM / DM / PC,,,0,22500
+PC-LATAM-P1-3,2.1.4,(LATAM Project Coordinator-P1-3),(LATAM - Project Coordinator - Consultant 13),225,150,0,150,189d,12/08/25,09/04/26,16,10%,P1-PM / DM / PC,,,0,9000
+PC-LATAM-P1-4,2.1.5,,(LATAM - Project Coordinator - Consultant 14),,150,0,150,189d,12/08/25,09/04/26,16,10%,P1-PM / DM / PC,,,0,9000
+PE-USA-P1-4,2.1.6,(US Project Executive-P1-4),(Project Executive - Advisory 14),50,50,0,50,189d,12/08/25,09/04/26,16,3%,P1-PM / DM / PC,,,0,3000
+1 - Employee Central,2.1.7,,,,,0,0,1d,12/08/25,12/08/25,16,,P1-Employee Central,,,0,0
+2 - Employee Central Time / Time Off,2.1.8,,,,,0,0,23d,12/08/25,01/09/26,16,,P1-Employee Central,,,0,0
+8 - Recruiting Management,2.1.9,,,,,0,0,33d,12/08/25,01/26/26,16,,P1-Employee Central,,,0,0
+9 - Recruiting Marketing,2.1.10,,,,,0,0,33d,12/08/25,01/26/26,16,,P1-Employee Central,,,0,0
+10 - Onboarding,2.1.11,,,,,0,0,33d,12/08/25,01/26/26,16,,P1-Employee Central,,,0,0
+12 - Compensation Management,2.1.12,,,,,0,0,37d,12/08/25,01/30/26,16,,P1-Employee Central,,,0,0
+P1-1 - Employee Central,2.2,,,850,850,0,1050,450d,12/09/25,09/20/27,22,,,1,,0,63000
+Advanced data migration,2.2.1,(1-EC-Advanced data migration-Consultant-USA-P1-1),"(Employee Central - Consultant 11)
+(Employee Central - Lead 13)",50,50,0,50,450d,12/09/25,09/20/27,,1%,P1-Employee Central,,,0,3000
+Core scope,2.2.2,(1-EC-Core scope-Consultant-LATAM-P1-2),(LATAM - Employee Central - Consultant 12),400,100,0,100,149d,12/09/25,07/13/26,,8%,P1-Employee Central,,,0,6000
+Core scope,2.2.3,(1-EC-Core scope-Consultant-LATAM-P1-2),(LATAM - Employee Central - 14),400,400,0,400,149d,12/09/25,07/13/26,,34%,P1-Employee Central,,,0,24000
+Core scope,2.2.4,,(Employee Central - Advisory),0,100,0,100,149d,12/09/25,07/13/26,,8%,P1-Employee Central,,,0,6000
+Core scope,2.2.5,(1-EC-Core scope-Lead-USA-P1-3),(Employee Central - Lead 13),400,400,0,400,149d,12/09/25,07/13/26,,34%,P1-Employee Central,,,0,24000
+P1-2 - Employee Central Time / Time Off,2.3,,,1050,1050,0,1050,126d,01/12/26,07/10/26,23,,,2,,0,63000
+Core scope Time Off,2.3.1,(2-EC Time / TM Off-Core scope Time Off-Consultant-LATAM-P1-1),(LATAM - Employee Central Time Off - Consultant 11),100,100,0,100,126d,01/12/26,07/10/26,,10%,P1-Employee Central Time / Time Off,,,0,6000
+Core scope Time Off,2.3.2,(2-EC Time / TM Off-Core scope Time Off-Lead-USA-P1-2),(Employee Central Time Off - Lead 12),150,150,0,150,126d,01/12/26,07/10/26,,15%,P1-Employee Central Time / Time Off,,,0,9000
+Core scope Time Tracking -CA,2.3.3,(2-EC Time / TM Off-Core scope Time Tracking -CA-Consultant-USA-P1-3),(Employee Central Time Off - Consultant 13),100,100,0,100,126d,01/12/26,07/10/26,,10%,P1-Employee Central Time / Time Off,,,0,6000
+Core scope Time Tracking -CA,2.3.4,(2-EC Time / TM Off-Core scope Time Tracking -CA-Lead-USA-P1-4),(Employee Central Time Off - Lead 14),150,150,0,150,126d,01/12/26,07/10/26,,15%,P1-Employee Central Time / Time Off,,,0,9000
+Core scope Time Tracking -USA,2.3.5,(2-EC Time / TM Off-Core scope Time Tracking -USA-Consultant-LATAM-P1-5),(LATAM - Employee Central Time Off - Consultant 15),250,250,0,250,126d,01/12/26,07/10/26,,25%,P1-Employee Central Time / Time Off,,,0,15000
+Core scope Time Tracking -USA,2.3.6,(2-EC Time / TM Off-Core scope Time Tracking -USA-Lead-USA-P1-6),(Employee Central Time Off - Lead 16),300,300,0,300,126d,01/12/26,07/10/26,,30%,P1-Employee Central Time / Time Off,,,0,18000
+P1-8 - Recruiting Management,2.4,,,500,500,0,600,93d,01/27/26,06/05/26,24,,,8,,0,36000
+Core scope,2.4.1,(8-RCM-Core scope-Consultant-LATAM-P1-1),(LATAM - Recruiting Management - Consultant 11),200,200,0,200,93d,01/27/26,06/05/26,,27%,P1-Recruiting Management,,,0,12000
+Core scope,2.4.2,(8-RCM-Core scope-Lead-USA-P1-2),(Recruiting Management - Lead 12),300,400,0,400,93d,01/27/26,06/05/26,,54%,P1-Recruiting Management,,,0,24000
+P1-9 - Recruiting Marketing,2.5,,,275,275,0,275,93d,01/27/26,06/05/26,25,,,9,,0,16500
+Core scope,2.5.1,(9-RMK-Core scope-Consultant-LATAM-P1-1),(LATAM - Recruiting Marketing - Consultant 11),100,100,0,100,93d,01/27/26,06/05/26,,13%,P1-Recruiting Marketing,,,0,6000
+Core scope,2.5.2,(9-RMK-Core scope-Lead-USA-P1-2),(Recruiting Marketing - Lead 12),175,175,0,175,93d,01/27/26,06/05/26,,24%,P1-Recruiting Marketing,,,0,10500
+P1-10 - Onboarding,2.6,,,400,400,0,500,93d,01/27/26,06/05/26,26,,,10,,0,30000
+Core scope,2.6.1,(10-Onb-Core scope-Consultant-LATAM-P1-1),(LATAM - Onboarding - Consultant 11),150,150,0,150,93d,01/27/26,06/05/26,,20%,P1-Onboarding,,,0,9000
+Core scope,2.6.2,(10-Onb-Core scope-Lead-USA-P1-2),(Onboarding - Lead 12),250,350,0,350,93d,01/27/26,06/05/26,,47%,P1-Onboarding,,,0,21000
+P1-12 - Compensation Management,2.7,,,1000,1000,0,1000,40d,02/02/26,03/27/26,27,,,12,,0,60000
+Comp Scope,2.7.1,(12-Comp-Comp Scope-Lead-USA-P1-1),(Compensation Management - Lead 11),1000,1000,0,1000,40d,02/02/26,03/27/26,,313%,P1-Compensation Management,,,0,60000
+Integrations (All Phases),3,,,460,460,0,460,154d,12/08/25,07/17/26,,,,,,0,27600
+Integration Delivery,3.1,,,460,460,0,460,154d,12/08/25,07/17/26,,,,,,0,27600
+Phase 1 Start Leads (Day Minus 1),3.1.1,,,,0,0,0,23d,12/08/25,01/09/26,16,,P1-Employee Central,,,0,0
+Phase 1 Start Consultants (Day Minus 1),3.1.2,,,,0,0,0,1d,01/12/26,01/12/26,54,,P1-Employee Central,,,0,0
+401k - (US Integration Lead 1-P1) - P1,3.1.3,(US Integration Lead 1-P1),(Integrations - SAP BTP - Lead 11),50,50,0,50,126d,01/12/26,07/10/26,54,5%,P1-Integrations - BTP / Boomi,,,0,3000
+401k - (Labs Payroll Integration Lead 1-P1) - P1,3.1.4,(Labs Payroll Integration Lead 1-P1),(LABS - Integrations - SAP BTP - Advisory 11),30,30,0,30,126d,01/12/26,07/10/26,54,3%,P1-Integrations - BTP / Boomi,,,0,1800
+401k - (Labs Integration Consultant 1-P1) - P1,3.1.5,(Labs Integration Consultant 1-P1),(LABS - Integrations - SAP BTP - Consultant 11),40,40,0,40,130d,01/13/26,07/17/26,55,4%,P1-Integrations - BTP / Boomi,,,0,2400
+AD - (US Integration Lead 1-P1) - P1,3.1.6,(US Integration Lead 1-P1),(Integrations - SAP BTP - Lead 11),60,60,0,60,126d,01/12/26,07/10/26,54,6%,P1-Integrations - BTP / Boomi,,,0,3600
+AD - (Labs Payroll Integration Lead 1-P1) - P1,3.1.7,(Labs Payroll Integration Lead 1-P1),(LABS - Integrations - SAP BTP - Advisory 11),40,40,0,40,126d,01/12/26,07/10/26,54,4%,P1-Integrations - BTP / Boomi,,,0,2400
+AD - (Labs Integration Consultant 2-P1) - P1,3.1.8,(Labs Integration Consultant 2-P1),(LABS - Integrations - SAP BTP - Consultant 12),50,50,0,50,130d,01/13/26,07/17/26,55,5%,P1-Integrations - BTP / Boomi,,,0,3000
+GL fINANCE posting - (US Integration Lead 2-P1) - P1,3.1.9,(US Integration Lead 2-P1),(Integrations - SAP BTP - Lead 12),80,80,0,80,126d,01/12/26,07/10/26,54,8%,P1-Integrations - BTP / Boomi,,,0,4800
+GL fINANCE posting - (Labs Payroll Integration Lead 1-P1) - P1,3.1.10,(Labs Payroll Integration Lead 1-P1),(LABS - Integrations - SAP BTP - Advisory 11),50,50,0,50,126d,01/12/26,07/10/26,54,5%,P1-Integrations - BTP / Boomi,,,0,3000
+GL fINANCE posting - (Labs Integration Consultant 3-P1) - P1,3.1.11,(Labs Integration Consultant 3-P1),(LABS - Integrations - SAP BTP - Consultant 13),60,60,0,60,130d,01/13/26,07/17/26,55,6%,P1-Integrations - BTP / Boomi,,,0,3600
+Hypercare,4,,,300,300,0,200,92d,03/23/26,07/31/26,,,,,,0,12000
+P2-Hypercare,4.1,,,300,300,0,200,92d,03/23/26,07/31/26,,,,,,0,12000
+Hypercare,4.1.1,,(Hypercare - Lead),300,200,0,200,92d,03/23/26,07/31/26,,27%,Hypercare,,,0,12000
