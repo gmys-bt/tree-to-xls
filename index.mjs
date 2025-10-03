@@ -1,54 +1,75 @@
 import * as XLSX from 'xlsx';
 
+const TASK_NAME = 'Task Name';
+const WBS_CODE_PPSA = 'WBS Code (PPSA)';
+const ROLE_NAME_PRICING_SHEET =
+  'Role Name (Pricing Sheet Original Reference - Do n';
+const ASSIGNED_TO = 'Assigned To';
+const BUDGETED_HOURS = 'Budgeted Hours';
+const EFFORT_HRS = 'Effort (hrs)';
+const WORKED_TASK_HOURS = 'Worked Task Hours';
+const REMAINING_TASK_HOURS = 'Remaining Task Hours';
+const DURATION = 'Duration';
+const START_DATE = 'Start Date';
+const END_DATE = 'End Date';
+const PREDECESSORS = 'Predecessors';
+const PERCENT_ALLOCATION = '% Allocation';
+const TASK_TYPE = 'Task Type';
+const COMMENTS = 'Comments';
+const OPEN_FOR_TIME = 'Open for Time';
+const WORKED_MINUTES_PPSA = 'Worked Minutes (PPSA)';
+const REMAINING_MINUTES_PPSA = 'Remaining Minutes (PPSA)';
+
+// An array, to guarantee order
 const columnMapping = [
-  'Task Name',
-  'WBS Code (PPSA)',
-  'Role Name (Pricing Sheet Original Reference - Do n',
-  'Assigned To',
-  'Budgeted Hours',
-  'Effort (hrs)',
-  'Worked Task Hours',
-  'Remaining Task Hours',
-  'Duration',
-  'Start Date',
-  'End Date',
-  'Predecessors',
-  '% Allocation',
-  'Task Type',
-  'Comments',
-  'Open for Time',
-  'Worked Minutes (PPSA)',
-  'Remaining Minutes (PPSA)',
+  TASK_NAME,
+  WBS_CODE_PPSA,
+  ROLE_NAME_PRICING_SHEET,
+  ASSIGNED_TO,
+  BUDGETED_HOURS,
+  EFFORT_HRS,
+  WORKED_TASK_HOURS,
+  REMAINING_TASK_HOURS,
+  DURATION,
+  START_DATE,
+  END_DATE,
+  PREDECESSORS,
+  PERCENT_ALLOCATION,
+  TASK_TYPE,
+  COMMENTS,
+  OPEN_FOR_TIME,
+  WORKED_MINUTES_PPSA,
+  REMAINING_MINUTES_PPSA,
 ];
 
 const tree = [
   {
-    name: 'P0 (Phase 0)',
-    'WBS Code (PPSA)': '1.1.1',
+    [TASK_NAME]: 'P0 (Phase 0)',
+    [WBS_CODE_PPSA]: '1.1.1',
     children: [
       {
-        name: 'P0-Delivery / Project Management',
-        'WBS Code (PPSA)': '1.1.1',
+        [TASK_NAME]: 'P0-Delivery / Project Management',
+        [WBS_CODE_PPSA]: '1.1.1',
         children: [
           {
-            'Task Name': 'Phase 0 Day Before',
-            'WBS Code (PPSA)': '1.1.1',
-            'Role Name (Pricing Sheet Original Reference - Do n': '',
-            'Assigned To': '',
-            'Budgeted Hours': 618,
-            'Effort (hrs)': 618,
-            'Worked Task Hours': 0,
-            'Remaining Task Hours': 0,
-            Duration: '68d',
-            'Start Date': '08/24/25',
-            'End Date': '11/26/25',
-            Predecessors: '',
-            '% Allocation': '',
-            'Task Type': '',
-            Comments: '',
-            'Open for Time': 'True',
-            'Worked Minutes (PPSA)': '',
-            'Remaining Minutes (PPSA)': 37080,
+            [TASK_NAME]: 'Phase 0 Day Before',
+            [WBS_CODE_PPSA]: '1.1.1',
+            [ROLE_NAME_PRICING_SHEET]: '',
+            [ASSIGNED_TO]: '',
+            [BUDGETED_HOURS]: 618,
+            [EFFORT_HRS]: 618,
+            [WORKED_TASK_HOURS]: 0,
+            [REMAINING_TASK_HOURS]: 0,
+            [DURATION]: '68d',
+            [START_DATE]: '08/24/25',
+            [END_DATE]: '11/26/25',
+            [PREDECESSORS]: '',
+            [PERCENT_ALLOCATION]: '',
+            [TASK_TYPE]: '',
+            [COMMENTS]: '',
+            [OPEN_FOR_TIME]: 'True',
+            [WORKED_MINUTES_PPSA]: '',
+            [REMAINING_MINUTES_PPSA]: 37080,
           },
         ],
       },
@@ -62,11 +83,8 @@ const flatten = (treeStructure, level = 0) => {
   for (const node of treeStructure) {
     const row = [];
 
-    // get cell names based on props
-    const keys = Object.keys(node).filter((k) => k !== 'children');
-
     // put values on respective col indexes
-    keys.forEach((k, i) => {
+    columnMapping.forEach((k, i) => {
       row[i] = node[k];
     });
 
@@ -74,7 +92,7 @@ const flatten = (treeStructure, level = 0) => {
     rows.push({ row, level: level > 1 ? 2 : level });
 
     if (node.children) {
-      const parsedChildren = flatten(node.children, level + keys.length);
+      const parsedChildren = flatten(node.children, level + 1);
       rows.push(...parsedChildren.rows);
     }
   }
@@ -87,7 +105,7 @@ const result = flatten(tree);
 const dataToExport = [columnMapping, ...result.rows.map((row) => row.row)];
 const ws = XLSX.utils.aoa_to_sheet(dataToExport);
 
-console.log(dataToExport);
+console.log(result.rows);
 
 if (!ws['outline']) ws['!outline'] = {};
 ws['!outline'].above = true;
