@@ -1,6 +1,6 @@
 import * as XLSX from 'xlsx';
 
-const headers = [
+const columnMapping = [
   'Task Name',
   'WBS Code (PPSA)',
   'Role Name (Pricing Sheet Original Reference - Do n',
@@ -84,13 +84,7 @@ const flatten = (treeStructure, level = 0) => {
 
 const result = flatten(tree);
 
-// should read this from config instead
-const deduplicatedHeaders = [Object.keys(tree[0].children[0].children[0])];
-
-const dataToExport = [
-  deduplicatedHeaders,
-  ...result.rows.map((row) => row.row),
-];
+const dataToExport = [columnMapping, ...result.rows.map((row) => row.row)];
 const ws = XLSX.utils.aoa_to_sheet(dataToExport);
 
 console.log(dataToExport);
