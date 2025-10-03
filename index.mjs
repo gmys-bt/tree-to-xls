@@ -1,56 +1,54 @@
 import * as XLSX from 'xlsx';
 
+const headers = [
+  'Task Name',
+  'WBS Code (PPSA)',
+  'Role Name (Pricing Sheet Original Reference - Do n',
+  'Assigned To',
+  'Budgeted Hours',
+  'Effort (hrs)',
+  'Worked Task Hours',
+  'Remaining Task Hours',
+  'Duration',
+  'Start Date',
+  'End Date',
+  'Predecessors',
+  '% Allocation',
+  'Task Type',
+  'Comments',
+  'Open for Time',
+  'Worked Minutes (PPSA)',
+  'Remaining Minutes (PPSA)',
+];
+
 const tree = [
   {
-    name: 'group 1',
+    name: 'P0 (Phase 0)',
+    'WBS Code (PPSA)': '1.1.1',
     children: [
       {
-        name: 'subgroup 1',
+        name: 'P0-Delivery / Project Management',
+        'WBS Code (PPSA)': '1.1.1',
         children: [
           {
-            name: 'fries',
-            address: 'some address',
-            city: 'new york',
-          },
-          {
-            name: 'ice cream',
-            address: 'some address',
-            city: 'boston',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    name: 'group 2',
-    children: [
-      {
-        name: 'subgroup 1',
-        children: [
-          {
-            name: 'fries',
-            address: 'some address',
-            city: 'new york',
-          },
-          {
-            name: 'ice cream',
-            address: 'some address',
-            city: 'boston',
-          },
-        ],
-      },
-      {
-        name: 'subgroup 2',
-        children: [
-          {
-            name: 'fries',
-            address: 'some address',
-            city: 'new york',
-          },
-          {
-            name: 'ice cream',
-            address: 'some address',
-            city: 'boston',
+            'Task Name': 'Phase 0 Day Before',
+            'WBS Code (PPSA)': '1.1.1',
+            'Role Name (Pricing Sheet Original Reference - Do n': '',
+            'Assigned To': '',
+            'Budgeted Hours': 618,
+            'Effort (hrs)': 618,
+            'Worked Task Hours': 0,
+            'Remaining Task Hours': 0,
+            Duration: '68d',
+            'Start Date': '08/24/25',
+            'End Date': '11/26/25',
+            Predecessors: '',
+            '% Allocation': '',
+            'Task Type': '',
+            Comments: '',
+            'Open for Time': 'True',
+            'Worked Minutes (PPSA)': '',
+            'Remaining Minutes (PPSA)': 37080,
           },
         ],
       },
@@ -60,19 +58,14 @@ const tree = [
 
 const flatten = (treeStructure, level = 0) => {
   const rows = [];
-  const headers = [];
 
   for (const node of treeStructure) {
     const row = [];
-    // at what cell do we start inserting data
-    const baseLevel = level > 0 ? level - 1 : level;
 
     // get cell names based on props
     const keys = Object.keys(node).filter((k) => k !== 'children');
 
-    // deduplicated headers per level
-    headers[level] = keys.map((k) => `${level - 1}.${k}`);
-
+    // put values on respective col indexes
     keys.forEach((k, i) => {
       row[i] = node[k];
     });
@@ -83,18 +76,16 @@ const flatten = (treeStructure, level = 0) => {
     if (node.children) {
       const parsedChildren = flatten(node.children, level + keys.length);
       rows.push(...parsedChildren.rows);
-      headers.push(...parsedChildren.headers);
     }
   }
 
-  return { rows, headers: headers.filter(Boolean).flat() };
+  return { rows };
 };
 
 const result = flatten(tree);
 
-const deduplicatedHeaders = [...new Set(result.headers)]
-  .map((h) => h.split('.')[1])
-  .splice(-3);
+// should read this from config instead
+const deduplicatedHeaders = [Object.keys(tree[0].children[0].children[0])];
 
 const dataToExport = [
   deduplicatedHeaders,
