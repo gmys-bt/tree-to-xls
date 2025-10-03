@@ -96,8 +96,6 @@ const deduplicatedHeaders = [...new Set(result.headers)]
   .map((h) => h.split('.')[1])
   .splice(-3);
 
-console.log(result.rows);
-
 const dataToExport = [
   deduplicatedHeaders,
   ...result.rows.map((row) => row.row),
